@@ -11,8 +11,9 @@
 	import FaSolidUtensils from "svelte-icons-pack/fa/FaSolidUtensils";
 	import FaSolidUserEdit from "svelte-icons-pack/fa/FaSolidUserEdit";
 	import FaNewspaper from "svelte-icons-pack/fa/FaNewspaper";
-	//import images
-	import SeniLogo from "$lib/images/seniAll.png";
+	//Import svelte components
+	import Header from "$lib/components/Header.svelte"
+	import Home from "$lib/components/Home.svelte"
 
 	let tabsOptions = [
 		{ name: "Resumen", icon: FaSolidWeight },
@@ -22,24 +23,20 @@
 		{ name: "Noticias", icon: FaNewspaper }
 	]
 	let activeTab = 0;
-
+ 
 </script>
 
 <div class="relative h-screen">
 
 		<!-- Header -->
-		<div class="p-2 pl-4 bg-gradient-to-r from-cyan-500 to-blue-500 w-full flex">
-			<img width=30 src={SeniLogo}/>
-			<h1 class="text-white text-xl inline-block align-middle pt-2 pl-2">Seni</h1>
-		</div>
+		<Header />
 
 		<!-- Content -->
 		<div class="p-2">
 			{#each tabsOptions as item, i}
 				{#if activeTab === i}
 					<div class="">
-					  Tab screen 
-						{activeTab}
+					  <Home />
 					</div>
 				{/if}
 			{/each}
@@ -62,13 +59,3 @@
 		</div>
 </div>
 
-<style>
-	.active{
-		color: var(--darker-blue);
-		font-weight: bold;
-	}
-	.default-tab{
-		color: var(--light-blue)
-	}
-
-</style>
