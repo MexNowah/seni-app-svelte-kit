@@ -9,5 +9,8 @@
   <MeasuresWidget />
 
   <!-- Graficos -->
-  <GraphicsWidget />
+  <div class="mt-4">
+    <GraphicsWidget />
+  </div>
+  
 </div>

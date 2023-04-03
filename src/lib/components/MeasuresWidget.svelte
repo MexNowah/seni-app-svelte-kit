@@ -2,7 +2,7 @@
 
   let measures = [
     { name: 'Peso (kg)', value: 69.8, showMore: false},
-    { name: 'Índice de masa corporal (kg/m2)', value: 22.92, showMore: false},
+    { name: 'Índice de masa corporal (kg/m²)', value: 22.92, showMore: false},
     { name: 'Porcentaje de grasa (%)', value: 20.15, showMore: false},
     { name: 'Porcentaje masa muscular (%)', value: 40.43, showMore: false},
     { name: 'Cintura (cm)', value: 79.80, showMore: true},
@@ -21,7 +21,9 @@
       {#each measures as measure, i}
         <div class="pt-1 pb-1 pl-4 pr-4 grid grid-flow-col border">  
            <div class="">{measure.name}</div>
-           <div class="text-right">{measure.value}</div>
+           <div class="text-right relative">
+              <div class="flex absolute right-0 rounded-xl bg-sky-700 pl-2 pr-2 text-white">{measure.value}</div>
+           </div>
         </div>
       {/each}
     </div>
