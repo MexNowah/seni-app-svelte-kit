@@ -13,7 +13,7 @@
           datasets: [
             {
               label: 'Peso (Kg)', // Name the series
-              data: [ 70,	69,	68,	68.5], // Specify the data values array
+              data: [ 72,	69,	68,	68.5, 67], // Specify the data values array
               fill: true,
               borderColor: '#2196f3', // Add custom color border (Line)
               backgroundColor: 'rgba(33, 150, 243, 0.10)', // Add custom color background (Points and Fill)
@@ -22,7 +22,7 @@
             },
             {
               label: 'Masa Corporal (Kg/m²)', // Name the series
-              data: [ 28,	25,	24,	22.92	], // Specify the data values array
+              data: [ 28,	25,	24,	26, 25	], // Specify the data values array
               fill: true,
               borderColor: '#4CAF50', // Add custom color border (Line)
               backgroundColor: 'rgba(76, 175, 80, 0.5)', // Add custom color background (Points and Fill)
@@ -31,7 +31,7 @@
             },
             {
               label: 'Grasa (%)', // Name the series
-              data: [ 29,	27,	26.5,	20.15], // Specify the data values array
+              data: [ 29,	27,	26.5,	20.15, 18], // Specify the data values array
               fill: true,
               borderColor: '#e67e22', // Add custom color border (Line)
               backgroundColor: 'rgba(230, 126, 34, 0.8)', // Add custom color background (Points and Fill)
@@ -40,7 +40,7 @@
             },
             {
               label: 'Masa Muscular (%)', // Name the series
-              data: [ 32,	34,	36,	40.43], // Specify the data values array
+              data: [ 32,	34,	36,	40.43, 42], // Specify the data values array
               fill: true,
               borderColor: '#34495e', // Add custom color border (Line)
               backgroundColor: 'rgba(52, 73, 94, 0.65)', // Add custom color background (Points and Fill)
@@ -51,8 +51,8 @@
       },
       options: {
         responsive: true, // Instruct chart js to respond nicely.
-        maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-      }
+      },
+
     });
     
 	});
