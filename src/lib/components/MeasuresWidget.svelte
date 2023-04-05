@@ -14,7 +14,6 @@
     { name: 'Cadera (cm)', value: client?.personalInfo?.cadera, showMore: true},
     { name: 'Brazo (cm)', value: client?.querys && client?.querys[0]?.brazorelajado || '-' , showMore: true},
     { name: 'Abdomen (cm)', value: client?.querys && client?.querys[0]?.abdomen || '-' , showMore: true},
-    { name: 'Humeral (cm)', value: client?.personalInfo?.humeral, showMore: true},
     { name: 'Pantorrilla (cm)', value: client?.querys && client?.querys[0]?.pantorrilla, showMore: true}
   ]
   let showMore = false;

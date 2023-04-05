@@ -1,11 +1,15 @@
 <script>
   import { onMount } from 'svelte'
 
+  export let weightArray;
+  export let imcArray;
+  export let grasaArray;
+  export let masaArray;
+
   onMount(() => {
 		
-
     const ctx = document.getElementById('myChart');
-
+    
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -13,7 +17,7 @@
           datasets: [
             {
               label: 'Peso (Kg)', // Name the series
-              data: [ 72,	69,	68,	68.5, 67], // Specify the data values array
+              data: weightArray, // Specify the data values array
               fill: true,
               borderColor: '#2196f3', // Add custom color border (Line)
               backgroundColor: 'rgba(33, 150, 243, 0.10)', // Add custom color background (Points and Fill)
@@ -22,7 +26,7 @@
             },
             {
               label: 'Masa Corporal (Kg/m²)', // Name the series
-              data: [ 28,	25,	24,	26, 25	], // Specify the data values array
+              data: imcArray, // Specify the data values array
               fill: true,
               borderColor: '#4CAF50', // Add custom color border (Line)
               backgroundColor: 'rgba(76, 175, 80, 0.5)', // Add custom color background (Points and Fill)
@@ -31,7 +35,7 @@
             },
             {
               label: 'Grasa (%)', // Name the series
-              data: [ 29,	27,	26.5,	20.15, 18], // Specify the data values array
+              data: grasaArray, // Specify the data values array
               fill: true,
               borderColor: '#e67e22', // Add custom color border (Line)
               backgroundColor: 'rgba(230, 126, 34, 0.8)', // Add custom color background (Points and Fill)
@@ -40,7 +44,7 @@
             },
             {
               label: 'Masa Muscular (%)', // Name the series
-              data: [ 32,	34,	36,	40.43, 42], // Specify the data values array
+              data: masaArray, // Specify the data values array
               fill: true,
               borderColor: '#34495e', // Add custom color border (Line)
               backgroundColor: 'rgba(52, 73, 94, 0.65)', // Add custom color background (Points and Fill)
