@@ -34,7 +34,7 @@
 		<!-- Content -->
 		<div class="p-2">
 			{#each tabsOptions as item, i}
-				{#if item.name == 'Resumen'}
+				{#if item.name == 'Resumen' && activeTab == 0}
 					<div class="">
 					  <Home />
 					</div>

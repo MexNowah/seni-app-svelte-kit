@@ -3,18 +3,19 @@
   import {
     fade
   } from 'svelte/transition';
+  export let client;
 
   let measures = [
-    { name: 'Peso (kg)', value: 69.8, showMore: false},
-    { name: 'Índice de masa corporal (kg/m²)', value: 22.92, showMore: false},
-    { name: 'Porcentaje de grasa (%)', value: 20.15, showMore: false},
-    { name: 'Porcentaje masa muscular (%)', value: 40.43, showMore: false},
-    { name: 'Cintura (cm)', value: 79.80, showMore: true},
-    { name: 'Cadera (cm)', value: 96.20, showMore: true},
-    { name: 'Brazo (cm)', value: 28, showMore: true},
-    { name: 'Abdomen (cm)', value: 75.00, showMore: true},
-    { name: 'Humeral (cm)', value: 28, showMore: true},
-    { name: 'Pantorrilla (cm)', value: 35, showMore: true}
+    { name: 'Peso (kg)', value: client?.personalInfo?.weight, showMore: false},
+    { name: 'Índice de masa corporal (kg/m²)', value: client?.personalInfo?.IMC, showMore: false},
+    { name: 'Porcentaje de grasa (%)', value: client?.personalInfo?.porcentajeGrasa, showMore: false},
+    { name: 'Porcentaje masa muscular (%)', value: client?.personalInfo?.porcentajeMusculo, showMore: false},
+    { name: 'Cintura (cm)', value: client?.personalInfo?.cintura, showMore: true},
+    { name: 'Cadera (cm)', value: client?.personalInfo?.cadera, showMore: true},
+    { name: 'Brazo (cm)', value: client?.querys && client?.querys[0]?.brazorelajado || '-' , showMore: true},
+    { name: 'Abdomen (cm)', value: client?.querys && client?.querys[0]?.abdomen || '-' , showMore: true},
+    { name: 'Humeral (cm)', value: client?.personalInfo?.humeral, showMore: true},
+    { name: 'Pantorrilla (cm)', value: client?.querys && client?.querys[0]?.pantorrilla, showMore: true}
   ]
   let showMore = false;
  

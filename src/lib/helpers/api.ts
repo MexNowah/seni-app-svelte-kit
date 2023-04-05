@@ -16,6 +16,26 @@ export async function remoteMethod(url: string, data = {}) {
 	return response.json();
 }
 
+export async function getData(model: string, filter = {}) {
+	const token = localStorage.getItem('token');
+
+	let query = url + model + '?filter=' + JSON.stringify(filter) + '&access_token=' + token;
+	let uri = encodeURI(query);
+	console.log(uri, 'uri');
+	const response = await fetch(uri, {
+		method: 'GET',
+		mode: 'cors',
+		cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		redirect: 'follow',
+		referrerPolicy: 'no-referrer'
+	});
+	return response.json();
+}
+
 export async function Login(credentials = {}) {
 	const response = await fetch(url + 'Clients/login', {
 		method: 'POST',
