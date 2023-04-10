@@ -3,7 +3,7 @@
   import GraphicsWidget from '$lib/components/GraphicsWidget.svelte';
   //Import Api
   import { getData } from '$lib/helpers/api';
-
+  //Import Svelte
   import { onMount } from 'svelte'
 
   onMount(() => {

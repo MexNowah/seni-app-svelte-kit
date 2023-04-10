@@ -14,13 +14,14 @@
 	//Import svelte components
 	import Header from "$lib/components/Header.svelte"
 	import Home from "$lib/components/Home.svelte"
+	import Equivalents from "$lib/components/Equivalents.svelte"
 
 	let tabsOptions = [
 		{ name: "Resumen", icon: FaSolidWeight },
 		{ name: "Equivalentes", icon: FaSolidBalanceScale },
 		{ name: "Dieta", icon: FaSolidUtensils },
-		{ name: "Perfil", icon: FaSolidUserEdit },
-		{ name: "Noticias", icon: FaNewspaper }
+		/* { name: "Perfil", icon: FaSolidUserEdit },
+		{ name: "Noticias", icon: FaNewspaper } */
 	]
 	let activeTab = 0;
  
@@ -37,6 +38,11 @@
 				{#if item.name == 'Resumen' && activeTab == 0}
 					<div class="">
 					  <Home />
+					</div>
+				{/if}
+				{#if item.name == 'Equivalentes' && activeTab == 1}
+					<div class="">
+					  <Equivalents />
 					</div>
 				{/if}
 			{/each}
