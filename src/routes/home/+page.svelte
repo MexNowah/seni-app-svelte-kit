@@ -27,7 +27,7 @@
  
 </script>
 
-<div class="relative h-screen">
+<div class="relative overflow-hidden	 h-screen">
 
 		<!-- Header -->
 		<Header />
@@ -48,7 +48,7 @@
 			{/each}
 		</div>
 		<!-- Footer Tabs -->
-	 	<div class="absolute w-full bottom-0 p-2 grid grid-flow-col justify-stretch">
+	 	<div class="absolute w-full bottom-0 p-2 grid grid-flow-col justify-stretch bg-white">
 			{#each tabsOptions as item, i}
 				<div
 					on:click={() => activeTab = i}
