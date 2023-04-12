@@ -66,13 +66,13 @@
 
 
 
-<div> 
+<div class="pt-2"> 
   <!-- Medidas -->
   <div class="rounded-lg shadow-lg shadow-zinc-500">
     <div class="p-2 rounded-t-lg bg-zinc-200">
       Avances
     </div>
-    <div class="pb-2">
+    <div class="p-2 pb-4">
       <div class="pl-2">
         <canvas id="myChart"></canvas>
       </div>

@@ -2,12 +2,15 @@
   //Import Api
   import { getData } from '$lib/helpers/api';
   //Import Svelte
-  import { onMount } from 'svelte'
+  import { onMount } from 'svelte';
   //Import Icons
   import Icon from 'svelte-icons-pack/Icon.svelte';
 	import FaSolidChevronDown from "svelte-icons-pack/fa/FaSolidChevronDown";
 	import FaSolidChevronUp from "svelte-icons-pack/fa/FaSolidChevronUp";
   import FaBrandsSistrix from "svelte-icons-pack/fa/FaBrandsSistrix";
+  //Import images
+  
+  
 
   let categoriesOptions = [];
   let activeCategory;
@@ -73,7 +76,7 @@
   </div>
 
   {#if activeCategory}
-    <div class="flex w-full overflow-scroll p-2">
+    <div class="tabs-container flex w-full overflow-scroll p-2">
     {#each categoriesOptions as category, i}
       <button on:click={ () => changeCategory(category) } class="tab ring-2 ring-blue-500 rounded-lg p-1 ml-1 mr-1 ">
         {category.title}
@@ -83,12 +86,14 @@
   {/if}
 
   <div class="mt-2 p-2">
-    <div class="flex">
-        <div class="grow"> 
+    <div class="flex mb-2">
+        {#if activeCategory && activeCategory.imageUrl}
+          <div class="rounded-full w-11 h-11 bg-red-700 p-1 flex justify-center items-center">
+            <img src={activeCategory.imageUrl} alt="Category Logo" class="w-8">
+          </div>
+        {/if}
+        <div class="grow ml-2 mt-2"> 
           <h1 class="text-zinc-500 text-xl">{activeCategory && activeCategory.title + ` (${activeCategory.cal} Kcal)`}<h1>
-        </div>
-        <div class="">
-          <Icon src={FaSolidChevronUp} /> 
         </div>
     </div>
     <div class="overflow-scroll	h-screen">
