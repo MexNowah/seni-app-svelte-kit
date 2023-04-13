@@ -9,8 +9,6 @@
 	import FaSolidChevronUp from "svelte-icons-pack/fa/FaSolidChevronUp";
   import FaBrandsSistrix from "svelte-icons-pack/fa/FaBrandsSistrix";
   //Import images
-  
-  
 
   let categoriesOptions = [];
   let activeCategory;
@@ -109,7 +107,6 @@
 
   </div>
 
-
 </div>
 
 <style>
@@ -130,5 +127,4 @@
     color: white;
     background-color: rgb(59 130 246)
   }
-
 </style>

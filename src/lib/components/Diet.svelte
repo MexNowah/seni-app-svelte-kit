@@ -1,4 +1,8 @@
 <script>
+    //Import Api
+    import { getData } from '$lib/helpers/api';
+    //Import Svelte
+    import { onMount } from 'svelte';
     //Import components
     import DietMenu from '$lib/components/DietMenu.svelte';
     import PortionsMenu from '$lib/components/PortionsMenu.svelte';
@@ -6,7 +10,7 @@
     import Icon from 'svelte-icons-pack/Icon.svelte';
     import FaSolidPlus from "svelte-icons-pack/fa/FaSolidPlus";
 
-    let dietType = 'Menu';
+    let dietType = 'Portions';
 
     let menuMeals = [
         'Desayuno',
@@ -17,6 +21,28 @@
         'Cena'
     ];
     let activeMealTime = 'Desayuno';
+    let currentDiet;
+
+    onMount(() => {
+        getDiet()
+    })
+    
+    async function getDiet(){
+
+        let filter = {
+            where: {
+                clientId: localStorage.getItem('userId'),
+                isActive: true
+            },
+            limit: 1
+        }
+        let diets = await getData('Diets', filter);
+        if(diets && diets[0]) currentDiet = diets[0];
+        if(currentDiet.isMenu) dietType = 'Menu'
+        else dietType = 'Portions'
+        console.log(currentDiet, 'currentDiet');
+
+    }
 
     function changeMealTime(meal){
         activeMealTime = meal;
@@ -28,7 +54,7 @@
 <div class="relative">
     
     <div class="flex p-2">
-        <h1 class="text-xl grow">Dieta</h1>
+        <h1 class="text-lg grow">Dieta</h1>
         <div class="">
             <Icon size={24} src={FaSolidPlus} />
         </div>
@@ -50,7 +76,7 @@
         {#if dietType == 'Menu'}
             <DietMenu />
         {:else}
-            <PortionsMenu />
+            <PortionsMenu activeMealTime={activeMealTime} currentDiet={currentDiet}/>
         {/if}
     </div>
 
