@@ -15,6 +15,7 @@
 	import Header from "$lib/components/Header.svelte"
 	import Home from "$lib/components/Home.svelte"
 	import Equivalents from "$lib/components/Equivalents.svelte"
+	import Diet from "$lib/components/Diet.svelte"
 
 	let tabsOptions = [
 		{ name: "Resumen", icon: FaSolidWeight },
@@ -43,6 +44,11 @@
 				{#if item.name == 'Equivalentes' && activeTab == 1}
 					<div class="">
 					  <Equivalents />
+					</div>
+				{/if}
+				{#if item.name == 'Diet' && activeTab == 2}
+					<div class="">
+					  <Diet />
 					</div>
 				{/if}
 			{/each}

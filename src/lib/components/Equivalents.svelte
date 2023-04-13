@@ -96,7 +96,7 @@
           <h1 class="text-zinc-500 text-xl">{activeCategory && activeCategory.title + ` (${activeCategory.cal} Kcal)`}<h1>
         </div>
     </div>
-    <div class="overflow-scroll	h-screen">
+    <div class="overflow-scroll	h-screen no-show-scroll">
       {#each portions as portion, i}
         <div class="border-l-4 border-red-700 mt-1 mb-2 pl-2 pr-2">
           <h2 class="text-lg">{portion.name}</h2>
