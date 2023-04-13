@@ -28,7 +28,7 @@
   <!-- Medidas -->
   <div class="rounded-lg shadow-lg shadow-zinc-500">
     <div class="p-2 rounded-t-lg bg-zinc-200 grid grid-flow-col">
-      <h2>Medidas Actuales</h2>
+      <h2 class="text-lg">Medidas Actuales</h2>
       <div class="relative">
         <button class="absolute right-0 p-2 pt-0.5 pb-0.5 mr-1 bg-sky-600 text-white rounded-md" on:click={() => toggleShowMorefc()}> Ver mas </button>
       </div>

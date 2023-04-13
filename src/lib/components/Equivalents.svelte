@@ -78,7 +78,9 @@
   {#if activeCategory}
     <div class="tabs-container flex w-full overflow-scroll p-2">
     {#each categoriesOptions as category, i}
-      <button on:click={ () => changeCategory(category) } class="tab ring-2 ring-blue-500 rounded-lg p-1 ml-1 mr-1 ">
+      <button on:click={ () => changeCategory(category) } 
+      class:selected="{activeCategory.title == category.title}"
+      class="tab ring-2 ring-blue-500 rounded-lg p-1 ml-1 mr-1 ">
         {category.title}
       </button>  
     {/each}      
@@ -123,6 +125,10 @@
   .tabs-container {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+  }
+  .selected{
+    color: white;
+    background-color: rgb(59 130 246)
   }
 
 </style>

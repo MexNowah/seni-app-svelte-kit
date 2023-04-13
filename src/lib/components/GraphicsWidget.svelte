@@ -70,7 +70,7 @@
   <!-- Medidas -->
   <div class="rounded-lg shadow-lg shadow-zinc-500">
     <div class="p-2 rounded-t-lg bg-zinc-200">
-      Avances
+      <h2 class="text-lg">Avances</h2>
     </div>
     <div class="p-2 pb-4">
       <div class="pl-2">
