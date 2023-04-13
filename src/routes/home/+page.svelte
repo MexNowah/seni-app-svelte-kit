@@ -46,7 +46,7 @@
 					  <Equivalents />
 					</div>
 				{/if}
-				{#if item.name == 'Diet' && activeTab == 2}
+				{#if item.name == 'Dieta' && activeTab == 2}
 					<div class="">
 					  <Diet />
 					</div>

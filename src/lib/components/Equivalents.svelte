@@ -80,7 +80,7 @@
     {#each categoriesOptions as category, i}
       <button on:click={ () => changeCategory(category) } 
       class:selected="{activeCategory.title == category.title}"
-      class="tab ring-2 ring-blue-500 rounded-lg p-1 ml-1 mr-1 ">
+      class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
         {category.title}
       </button>  
     {/each}      
