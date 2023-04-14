@@ -51,3 +51,20 @@ export async function Login(credentials = {}) {
 	});
 	return response.json();
 }
+
+export async function Logout() {
+	const token = localStorage.getItem('token');
+
+	const response = await fetch(url + 'Clients/logout' + '&access_token=' + token, {
+		method: 'POST',
+		mode: 'cors',
+		cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		redirect: 'follow',
+		referrerPolicy: 'no-referrer'
+	});
+	return response.json();
+}
