@@ -11,6 +11,7 @@
     import FaSolidPlus from "svelte-icons-pack/fa/FaSolidPlus";
 
     let dietType = 'Portions';
+    let loading = true;
 
     let menuMeals = [
         'Desayuno',
@@ -29,19 +30,23 @@
     
     async function getDiet(){
 
-        let filter = {
-            where: {
-                clientId: localStorage.getItem('userId'),
-                isActive: true
-            },
-            limit: 1
+        try{
+            let filter = {
+                where: {
+                    clientId: localStorage.getItem('userId'),
+                    isActive: true
+                },
+                limit: 1
+            }
+            let diets = await getData('Diets', filter);
+            if(diets && diets[0]) currentDiet = diets[0];
+            if(currentDiet.isMenu) dietType = 'Menu'
+            else dietType = 'Portions'
+            
+            loading = false;
+        }catch(e){
+            console.log(e, 'error getting diet');
         }
-        let diets = await getData('Diets', filter);
-        if(diets && diets[0]) currentDiet = diets[0];
-        if(currentDiet.isMenu) dietType = 'Menu'
-        else dietType = 'Portions'
-        console.log(currentDiet, 'currentDiet');
-
     }
 
     function changeMealTime(meal){
@@ -72,13 +77,15 @@
             </div>
         {/if}
     </div>
-    <div class="">
-        {#if dietType == 'Menu'}
-            <DietMenu />
-        {:else}
-            <PortionsMenu activeMealTime={activeMealTime} currentDiet={currentDiet}/>
-        {/if}
-    </div>
+    {#if !loading}
+        <div class="">
+            {#if dietType == 'Menu'}
+                <DietMenu />
+            {:else}
+                <PortionsMenu activeMealTime={activeMealTime} currentDiet={currentDiet}/>
+            {/if}
+        </div>
+    {/if}
 
 </div>
 
