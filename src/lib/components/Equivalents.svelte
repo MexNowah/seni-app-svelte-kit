@@ -62,7 +62,7 @@
 </script>
 
 
-<div class="p-2 relative">
+<div class="relative">
 
   <div class="flex">
     <div class="grow">

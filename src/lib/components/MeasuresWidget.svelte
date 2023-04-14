@@ -37,14 +37,12 @@
     <div class="">
       {#each measures as measure, i}
         {#if !measure.showMore || showMore}
-        <div class="pt-2 pb-2 pl-4 pr-4 grid grid-flow-col border"
-          transition:fade
-        >  
-           <div class="p-1">
-            <p class="text-lg">{measure.name}</p>
+        <div class="pt-2 pb-2 pl-2 pr-2 flex border" transition:fade>  
+           <div class="p-1 flex-grow">
+            <p class="text-md">{measure.name}</p>
            </div>
-           <div class="text-right relative flex justify-center items-center">
-              <div class="flex absolute right-0 rounded-xl bg-sky-700 p-1 pl-2 pr-2 text-white ">
+           <div class="text-right flex justify-center items-center">
+              <div class="flex right-0 rounded-xl bg-sky-700 p-1 pl-2 pr-2 text-white ">
                 <p class="text-md">{ `${measure.value} ${measure.units}` }<p>
               </div>
            </div>

@@ -58,7 +58,7 @@
 
 <div class="relative">
     
-    <div class="flex p-2">
+    <div class="flex">
         <h1 class="text-lg grow">Dieta</h1>
         <!-- <div class="">
             <Icon size={24} src={FaSolidPlus} />
@@ -66,11 +66,11 @@
     </div>
     <div class="">
         {#if activeMealTime}
-            <div class="tabs-container flex w-full overflow-scroll p-2">
+            <div class="tabs-container flex w-full overflow-scroll pt-2 pb-2">
                 {#each menuMeals as meal, i}
                     <button on:click={ () => changeMealTime(meal) } 
                     class:selected="{activeMealTime == meal}"
-                    class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
+                    class="tab ring-2 ring-blue-500 rounded-full p-1 ml-1 mr-1 ">
                         <p class="text-md">{meal}</p>
                     </button>  
                 {/each}      
