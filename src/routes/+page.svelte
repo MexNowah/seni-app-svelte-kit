@@ -37,6 +37,7 @@
         localStorage.setItem('userId', resp.userId);
         localStorage.setItem('lastEmail', credentials.email)
       }
+      window.location.href = "/home";
       //loading = false;
     }catch(e){
       swal("Error de Authentificación", "Favor de verificar sus credenciales, en caso del error continuar contacta a tu nutriólogo!", "error");
