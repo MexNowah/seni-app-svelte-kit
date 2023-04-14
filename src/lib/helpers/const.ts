@@ -39,3 +39,4 @@ export const maskColors = {
 	ALE: '#ffcc00',
 	VDS: '#697a1f'
 };
+

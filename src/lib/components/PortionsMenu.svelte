@@ -16,8 +16,6 @@
 
     $: meals = currentDiet.portions[mask[activeMealTime]];
     
-    let loading = true;
-    
 </script>
 
 <div class="p-4">

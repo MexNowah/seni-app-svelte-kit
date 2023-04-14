@@ -42,7 +42,7 @@
             if(diets && diets[0]) currentDiet = diets[0];
             if(currentDiet.isMenu) dietType = 'Menu'
             else dietType = 'Portions'
-            
+            console.log(currentDiet, 'current diet');
             loading = false;
         }catch(e){
             console.log(e, 'error getting diet');
@@ -60,9 +60,9 @@
     
     <div class="flex p-2">
         <h1 class="text-lg grow">Dieta</h1>
-        <div class="">
+        <!-- <div class="">
             <Icon size={24} src={FaSolidPlus} />
-        </div>
+        </div> -->
     </div>
     <div class="">
         {#if activeMealTime}
@@ -80,7 +80,7 @@
     {#if !loading}
         <div class="">
             {#if dietType == 'Menu'}
-                <DietMenu />
+                <DietMenu activeMealTime={activeMealTime} currentDiet={currentDiet} />
             {:else}
                 <PortionsMenu activeMealTime={activeMealTime} currentDiet={currentDiet}/>
             {/if}
