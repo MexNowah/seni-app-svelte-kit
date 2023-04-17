@@ -8,11 +8,20 @@
 	import FaSolidChevronDown from "svelte-icons-pack/fa/FaSolidChevronDown";
 	import FaSolidChevronUp from "svelte-icons-pack/fa/FaSolidChevronUp";
   import FaBrandsSistrix from "svelte-icons-pack/fa/FaBrandsSistrix";
-  //Import images
+  //Import svelte components
+  import Spinner from '$lib/components/Spinner.svelte'
+  //Import animations
+  import { slide, fade } from "svelte/transition";
+  import { quintOut } from 'svelte/easing';
 
   let categoriesOptions = [];
   let activeCategory;
   let portions = [];
+  let loading = true;
+
+  let searchInput = "";
+
+  let _timeout = null;
 
   onMount(() => {
     getCategories()
@@ -31,6 +40,7 @@
         activeCategory = resp[0];
         categoriesOptions = resp;
         await getPotionsByCategory();
+        loading = false;
       }
     }catch(e){
       console.log(e, 'error fetching categories');
@@ -54,58 +64,106 @@
     }
   }
 
+  async function searchPortion(){
+
+    try{
+      
+      clearTimeout(_timeout);
+      
+      _timeout = setTimeout(async () => {
+        
+        let filter = {
+          where: {
+            name: {
+              like: searchInput,
+              options: 'i'
+            },
+            categoryId: activeCategory.id
+          }
+        }
+        let resp = await getData('Portions', filter);
+        if(resp){
+          portions = resp;
+          console.log('new portion', portions, activeCategory)
+        } 
+        
+      }, 500);
+      
+    }catch(e){
+      console.log(e, 'error fetching portions');
+    }
+  }
+
   function changeCategory(category){
       activeCategory = category;
       getPotionsByCategory()
   }
 
+  let transitionParams = {
+    delay: 50, 
+    duration: 300, 
+    easing: quintOut,
+    axis: 'y'
+  }; 
+    
 </script>
 
 
 <div class="relative">
-
-  <div class="flex">
-    <div class="grow">
-      <h1 class="text-lg">Equivalentes</h1>
+  
+  {#if loading}
+    <Spinner />
+  {:else}
+    <div class="flex">
+      <div class="grow">
+        <h1 class="pl-1 text-lg font-bold">Equivalentes</h1>
+      </div>
+      <div class="flex border-b border-gray-600	ml-1">
+        <div class="flex justify-center items-center">
+          <Icon src={FaBrandsSistrix} />
+        </div>
+        <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()}
+/>
+      </div>
     </div>
+    
     <div class="">
-      <Icon src={FaBrandsSistrix} />
-    </div>
-  </div>
+      {#if activeCategory}
+        <div class="tabs-container flex w-full overflow-scroll p-2">
+        {#each categoriesOptions as category, i}
+          <button on:click={ () => changeCategory(category) } 
+          class:selected="{activeCategory.title == category.title}"
+          class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
+            {category.title}
+          </button>  
+        {/each}      
+        </div>
+      {/if}
 
-  {#if activeCategory}
-    <div class="tabs-container flex w-full overflow-scroll p-2">
-    {#each categoriesOptions as category, i}
-      <button on:click={ () => changeCategory(category) } 
-      class:selected="{activeCategory.title == category.title}"
-      class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
-        {category.title}
-      </button>  
-    {/each}      
+      <div class="mt-2 p-2" in:slide={transitionParams} >
+        <div class="flex mb-2">
+            {#if activeCategory && activeCategory.imageUrl}
+              <div class="rounded-full w-11 h-11 bg-red-700 p-1 flex justify-center items-center">
+                <img src={activeCategory.imageUrl} alt="Category Logo" class="w-8">
+              </div>
+            {/if}
+            <div class="grow ml-2 mt-2"> 
+              <h1 class="text-zinc-500 text-xl">{activeCategory && activeCategory.title + ` (${activeCategory.cal} Kcal)`}<h1>
+            </div>
+        </div>
+        <div class="overflow-scroll	h-screen no-show-scroll" >
+          {#each portions as portion, i}
+            <div class="border-l-4 border-red-700 mt-1 mb-2 pl-2 pr-2" transition:fade>
+              <h2 class="text-lg">{portion.name}</h2>
+              <p class="text-base text-zinc-500">{`Porción: ${portion.value} ${portion.measure} ${portion.measure != 'g' ? `(${portion.grams}g)`: ''} `}</p>
+            </div>
+          {/each}
+        </div>
+
+      </div>
+
     </div>
   {/if}
-
-  <div class="mt-2 p-2">
-    <div class="flex mb-2">
-        {#if activeCategory && activeCategory.imageUrl}
-          <div class="rounded-full w-11 h-11 bg-red-700 p-1 flex justify-center items-center">
-            <img src={activeCategory.imageUrl} alt="Category Logo" class="w-8">
-          </div>
-        {/if}
-        <div class="grow ml-2 mt-2"> 
-          <h1 class="text-zinc-500 text-xl">{activeCategory && activeCategory.title + ` (${activeCategory.cal} Kcal)`}<h1>
-        </div>
-    </div>
-    <div class="overflow-scroll	h-screen no-show-scroll">
-      {#each portions as portion, i}
-        <div class="border-l-4 border-red-700 mt-1 mb-2 pl-2 pr-2">
-          <h2 class="text-lg">{portion.name}</h2>
-          <p class="text-base text-zinc-500">{`Porción: ${portion.value} ${portion.measure} ${portion.measure != 'g' ? `(${portion.grams}g)`: ''} `}</p>
-        </div>
-      {/each}
-    </div>
-
-  </div>
 
 </div>
 

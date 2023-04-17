@@ -74,7 +74,7 @@
     </div>
     <div class="p-2 pb-4">
       <div class="pl-2">
-        <canvas id="myChart"></canvas>
+        <canvas class="w-full" id="myChart"></canvas>
       </div>
     </div>
   </div>

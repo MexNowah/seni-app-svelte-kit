@@ -6,9 +6,13 @@
     //Import components
     import DietMenu from '$lib/components/DietMenu.svelte';
     import PortionsMenu from '$lib/components/PortionsMenu.svelte';
+    import Spinner from '$lib/components/Spinner.svelte';
     //Import Icons
     import Icon from 'svelte-icons-pack/Icon.svelte';
     import FaSolidPlus from "svelte-icons-pack/fa/FaSolidPlus";
+    //Import animations
+    import { slide } from "svelte/transition";
+    import { quintOut } from 'svelte/easing';
 
     let dietType = 'Portions';
     let loading = true;
@@ -53,6 +57,13 @@
         activeMealTime = meal;
     }
 
+    let transitionParams = {
+        delay: 50, 
+        duration: 300, 
+        easing: quintOut,
+        axis: 'y'
+    }; 
+
 </script>
 
 
@@ -78,13 +89,15 @@
         {/if}
     </div>
     {#if !loading}
-        <div class="">
+        <div class="" in:slide={transitionParams} >
             {#if dietType == 'Menu'}
                 <DietMenu activeMealTime={activeMealTime} currentDiet={currentDiet} />
             {:else}
                 <PortionsMenu activeMealTime={activeMealTime} currentDiet={currentDiet}/>
             {/if}
         </div>
+    {:else }
+        <Spinner />
     {/if}
 
 </div>

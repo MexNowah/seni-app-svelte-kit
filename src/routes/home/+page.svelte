@@ -16,6 +16,11 @@
 	import Home from "$lib/components/Home.svelte"
 	import Equivalents from "$lib/components/Equivalents.svelte"
 	import Diet from "$lib/components/Diet.svelte"
+	//Import animations
+  import { slide } from "svelte/transition";
+	import { quintOut } from 'svelte/easing';
+	import { fade } from 'svelte/transition';
+
 
 	let tabsOptions = [
 		{ name: "Resumen", icon: FaSolidWeight },
@@ -42,12 +47,12 @@
 					</div>
 				{/if}
 				{#if item.name == 'Equivalentes' && activeTab == 1}
-					<div class="">
+					<div class="" transition:fade="{{delay: 150, duration: 300}}">
 					  <Equivalents />
 					</div>
 				{/if}
 				{#if item.name == 'Dieta' && activeTab == 2}
-					<div class="">
+					<div class="" transition:fade="{{delay: 100, duration: 300}}">
 					  <Diet />
 					</div>
 				{/if}
