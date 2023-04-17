@@ -8,6 +8,7 @@
 	import FaSolidChevronDown from "svelte-icons-pack/fa/FaSolidChevronDown";
 	import FaSolidChevronUp from "svelte-icons-pack/fa/FaSolidChevronUp";
   import FaBrandsSistrix from "svelte-icons-pack/fa/FaBrandsSistrix";
+  import FaSolidTimes from "svelte-icons-pack/fa/FaSolidTimes";
   //Import svelte components
   import Spinner from '$lib/components/Spinner.svelte'
   //Import animations
@@ -99,6 +100,11 @@
       getPotionsByCategory()
   }
 
+  function resetSearch(){
+    searchInput = '';
+    getPotionsByCategory();
+  }
+
   let transitionParams = {
     delay: 50, 
     duration: 300, 
@@ -122,8 +128,14 @@
         <div class="flex justify-center items-center">
           <Icon src={FaBrandsSistrix} />
         </div>
-        <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()}
-/>
+        <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => 
+        searchPortion()} />
+        {#if searchInput.length}
+          <div on:click={() => resetSearch() } class="flex justify-center items-center">
+            <Icon src={FaSolidTimes} />
+          </div>
+        {/if}
+        
       </div>
     </div>
     
@@ -152,12 +164,18 @@
             </div>
         </div>
         <div class="overflow-scroll	h-screen no-show-scroll" >
-          {#each portions as portion, i}
-            <div class="border-l-4 border-red-700 mt-1 mb-2 pl-2 pr-2" transition:fade>
-              <h2 class="text-lg">{portion.name}</h2>
-              <p class="text-base text-zinc-500">{`Porción: ${portion.value} ${portion.measure} ${portion.measure != 'g' ? `(${portion.grams}g)`: ''} `}</p>
+          {#if portions.length}
+            {#each portions as portion, i}
+              <div class="border-l-4 border-red-700 mt-1 mb-2 pl-2 pr-2" transition:fade>
+                <h2 class="text-lg">{portion.name}</h2>
+                <p class="text-base text-zinc-500">{`Porción: ${portion.value} ${portion.measure} ${portion.measure != 'g' ? `(${portion.grams}g)`: ''} `}</p>
+              </div>
+            {/each}
+          {:else}
+            <div class="">
+              <h2>No se encontraron resultados<h2/>
             </div>
-          {/each}
+          {/if}
         </div>
 
       </div>
