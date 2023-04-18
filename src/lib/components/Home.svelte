@@ -13,7 +13,7 @@
   let client;
   let loading = true;
 
-  let weightArray = [ ];
+  let weightArray = [];
   let imcArray = [];
   let grasaArray = [];
   let masaArray = [];
@@ -52,10 +52,10 @@
           start = 0
         }
         for(let x = start; x < client.querys.length; x++){
-            weightArray.push(client.querys[x].weight ||weightArray[weightArray.length - 1 ] || 0);
-            imcArray.push(client.querys[x].IMC || imcArray[imcArray.length - 1 ] || 0);
-            grasaArray.push(client.querys[x].porcentajeGrasa ||grasaArray[grasaArray.length - 1 ] || 0);
-            masaArray.push(client.querys[x].porcentajeMusculo || masaArray[masaArray.length - 1 ] ||  0);
+          weightArray.push(client.querys[x].weight ||weightArray[weightArray.length - 1 ] || 0);
+          imcArray.push(client.querys[x].IMC || imcArray[imcArray.length - 1 ] || 0);
+          grasaArray.push(client.querys[x].porcentajeGrasa ||grasaArray[grasaArray.length - 1 ] || 0);
+          masaArray.push(client.querys[x].porcentajeMusculo || masaArray[masaArray.length - 1 ] ||  0);
         } 
         
       }
@@ -63,7 +63,6 @@
       loading = false;
       
   }
-
     
 </script>
 
@@ -84,6 +83,4 @@
     </div>
   {/if}
 
-  
-  
 </div>

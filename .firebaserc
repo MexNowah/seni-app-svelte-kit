@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "seni-234db"
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true
+  }
+}
+

@@ -1,7 +1,4 @@
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Seni Home" />
-</svelte:head>
+
 
 <script>
 	//Import Icons
@@ -17,10 +14,7 @@
 	import Equivalents from "$lib/components/Equivalents.svelte"
 	import Diet from "$lib/components/Diet.svelte"
 	//Import animations
-  import { slide } from "svelte/transition";
-	import { quintOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
-
 
 	let tabsOptions = [
 		{ name: "Resumen", icon: FaSolidWeight },
@@ -33,7 +27,7 @@
  
 </script>
 
-<div class="relative overflow-hidden	 h-screen">
+<div class="relative overflow-hidden h-screen">
 
 		<!-- Header -->
 		<Header />
@@ -58,12 +52,13 @@
 				{/if}
 			{/each}
 		</div>
+		
 		<!-- Footer Tabs -->
 	 	<div class="absolute w-full bottom-0 p-2 grid grid-flow-col justify-stretch bg-white">
 			{#each tabsOptions as item, i}
 				<div
 					on:click={() => activeTab = i}
-				  class={ activeTab == i ? 'text-sky-600' : 'text-zinc-500'}
+				  	class={ activeTab == i ? 'text-sky-600' : 'text-zinc-500'}
 					class:font-bold={activeTab == i}
 				>
 					<div class="text-center" >

@@ -44,7 +44,7 @@
         loading = false;
       }
     }catch(e){
-      console.log(e, 'error fetching categories');
+      //console.log(e, 'error fetching categories');
     }
   }
 
@@ -58,10 +58,10 @@
       let resp = await getData('Portions', filter);
       if(resp){
         portions = resp;
-        console.log('new portion', portions, activeCategory)
+        //console.log('new portion', portions, activeCategory)
       }
     }catch(e){
-      console.log(e, 'error fetching portions');
+      //console.log(e, 'error fetching portions');
     }
   }
 
@@ -85,13 +85,13 @@
         let resp = await getData('Portions', filter);
         if(resp){
           portions = resp;
-          console.log('new portion', portions, activeCategory)
+          //console.log('new portion', portions, activeCategory)
         } 
         
       }, 500);
       
     }catch(e){
-      console.log(e, 'error fetching portions');
+      //console.log(e, 'error fetching portions');
     }
   }
 
@@ -128,8 +128,7 @@
         <div class="flex justify-center items-center">
           <Icon src={FaBrandsSistrix} />
         </div>
-        <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => 
-        searchPortion()} />
+        <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
         {#if searchInput.length}
           <div on:click={() => resetSearch() } class="flex justify-center items-center">
             <Icon src={FaSolidTimes} />
@@ -173,7 +172,7 @@
             {/each}
           {:else}
             <div class="">
-              <h2>No se encontraron resultados<h2/>
+              <h2>No se encontraron resultados</h2>
             </div>
           {/if}
         </div>

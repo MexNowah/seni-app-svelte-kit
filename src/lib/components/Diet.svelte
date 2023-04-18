@@ -46,10 +46,10 @@
             if(diets && diets[0]) currentDiet = diets[0];
             if(currentDiet.isMenu) dietType = 'Menu'
             else dietType = 'Portions'
-            console.log(currentDiet, 'current diet');
+            //console.log(currentDiet, 'current diet');
             loading = false;
         }catch(e){
-            console.log(e, 'error getting diet');
+            //console.log(e, 'error getting diet');
         }
     }
 

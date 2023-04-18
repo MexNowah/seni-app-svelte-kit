@@ -21,7 +21,7 @@ export async function getData(model: string, filter = {}) {
 
 	let query = url + model + '?filter=' + JSON.stringify(filter) + '&access_token=' + token;
 	let uri = encodeURI(query);
-	console.log(uri, 'uri');
+	//console.log(uri, 'uri');
 	const response = await fetch(uri, {
 		method: 'GET',
 		mode: 'cors',

@@ -41,7 +41,7 @@
       //loading = false;
     }catch(e){
       swal("Error de Authentificación", "Favor de verificar sus credenciales, en caso del error continuar contacta a tu nutriólogo!", "error");
-      console.log('error in login', e);
+      //console.log('error in login', e);
       loading = false;
     }
   }
