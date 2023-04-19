@@ -7,3 +7,4 @@
 	--darker-blue: #003c74;
 	--gray: #7f8c8d;
 }
+*:focus {outline:none}

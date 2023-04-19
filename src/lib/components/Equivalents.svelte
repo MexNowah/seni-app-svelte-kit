@@ -146,7 +146,7 @@
           <div class="flex justify-center items-center">
             <Icon src={FaBrandsSistrix} />
           </div>
-          <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
+          <input class="pl-2 focus:outline-0 outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
           {#if searchInput.length}
             <div on:click={() => resetSearch() } class="flex justify-center items-center">
               <Icon src={FaSolidTimes} />
@@ -174,7 +174,7 @@
       <div class="mt-2 p-2" in:slide={transitionParams} >
         <div class="flex mb-2">
             {#if activeCategory && activeCategory.imageUrl}
-              <div class="rounded-full w-11 h-11 bg-red-700 p-1 flex justify-center items-center">
+              <div class="rounded-full w-11 h-11 p-1 flex justify-center items-center" style:background-color={activeCategory.color}>
                 <img src={activeCategory.imageUrl} alt="Category Logo" class="w-8">
               </div>
             {/if}
@@ -185,7 +185,7 @@
         <div class="overflow-scroll	h-screen no-show-scroll" >
           {#if portions.length}
             {#each portions as portion, i}
-              <div class="border-l-4 border-red-700 mt-1 mb-2 pl-2 pr-2" transition:fade>
+              <div class="border-l-4 mt-1 mb-2 pl-2 pr-2" style:border-color={activeCategory.color} transition:fade>
                 <h2 class="text-lg">{portion.name}</h2>
                 <p class="text-base text-zinc-500">{`Porción: ${portion.value} ${portion.measure} ${portion.measure != 'g' ? `(${portion.grams}g)`: ''} `}</p>
               </div>
