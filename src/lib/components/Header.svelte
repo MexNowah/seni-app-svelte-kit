@@ -17,7 +17,7 @@
     //Logout from api
     Logout();
     //Navigate to login
-    window.location.href = "/";
+    window.location.href = "/login";
   }
 </script>
 

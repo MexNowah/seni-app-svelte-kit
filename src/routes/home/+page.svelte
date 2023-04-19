@@ -24,6 +24,15 @@
 		{ name: "Noticias", icon: FaNewspaper } */
 	]
 	let activeTab = 0;
+	let standalone = true;
+
+	if (window.navigator?.standalone) {
+		standalone = true;
+  		console.log('The web app is running as a standalone app');
+	} else {
+		console.log('The web app is running in the browser');
+	}
+
  
 </script>
 
@@ -33,7 +42,7 @@
 		<Header />
 
 		<!-- Content -->
-		<div class="p-2">
+		<div class="p-2 main-content">
 			{#each tabsOptions as item, i}
 				{#if item.name == 'Resumen' && activeTab == 0}
 					<div class="">
@@ -54,7 +63,8 @@
 		</div>
 		
 		<!-- Footer Tabs -->
-	 	<div class="absolute w-full bottom-0 p-2 grid grid-flow-col justify-stretch bg-white">
+	 	<div class="absolute w-full bottom-0 p-2 pb-4 grid grid-flow-col justify-stretch bg-white">
+
 			{#each tabsOptions as item, i}
 				<div
 					on:click={() => activeTab = i}
@@ -69,5 +79,12 @@
 				
 			{/each}
 		</div>
+
 </div>
 
+<style>
+	.standalone{
+		
+	}
+
+</style>

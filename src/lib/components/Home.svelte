@@ -1,6 +1,7 @@
 <script> 
   import MeasuresWidget from '$lib/components/MeasuresWidget.svelte';
   import GraphicsWidget from '$lib/components/GraphicsWidget.svelte';
+  import Spinner from '$lib/components/Spinner.svelte';
   //Import Api
   import { getData } from '$lib/helpers/api';
   //Import Svelte
@@ -66,7 +67,7 @@
     
 </script>
 
-<div> 
+<div class="main-content no-show-scroll"> 
    
   {#if !loading}
     <!-- Medidas -->
@@ -81,6 +82,14 @@
         masaArray={masaArray}
       />
     </div>
+ 
   {/if}
 
 </div>
+
+<style>
+  .main-content{
+		overflow-y: scroll;
+		max-height: 560px;
+	}
+</style>

@@ -120,37 +120,42 @@
   {#if loading}
     <Spinner />
   {:else}
-    <div class="flex">
-      <div class="grow">
-        <h1 class="pl-1 text-lg font-bold">Equivalentes</h1>
-      </div>
-      <div class="flex border-b border-gray-600	ml-1">
-        <div class="flex justify-center items-center">
-          <Icon src={FaBrandsSistrix} />
+    
+
+    <div class="static">
+      <div class="flex">
+        <div class="grow">
+          <h1 class="pl-1 text-lg font-bold">Equivalentes</h1>
         </div>
-        <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
-        {#if searchInput.length}
-          <div on:click={() => resetSearch() } class="flex justify-center items-center">
-            <Icon src={FaSolidTimes} />
+        <div class="flex border-b border-gray-600	ml-1">
+          <div class="flex justify-center items-center">
+            <Icon src={FaBrandsSistrix} />
+          </div>
+          <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
+          {#if searchInput.length}
+            <div on:click={() => resetSearch() } class="flex justify-center items-center">
+              <Icon src={FaSolidTimes} />
+            </div>
+          {/if}
+          
+        </div>
+      </div>
+      <div >
+        {#if activeCategory}
+          <div class="tabs-container flex w-full overflow-scroll p-2">
+          {#each categoriesOptions as category, i}
+            <button on:click={ () => changeCategory(category) } 
+            class:selected="{activeCategory.title == category.title}"
+            class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
+              {category.title}
+            </button>  
+          {/each}      
           </div>
         {/if}
-        
       </div>
     </div>
-    
-    <div class="">
-      {#if activeCategory}
-        <div class="tabs-container flex w-full overflow-scroll p-2">
-        {#each categoriesOptions as category, i}
-          <button on:click={ () => changeCategory(category) } 
-          class:selected="{activeCategory.title == category.title}"
-          class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
-            {category.title}
-          </button>  
-        {/each}      
-        </div>
-      {/if}
 
+    <div class="">
       <div class="mt-2 p-2" in:slide={transitionParams} >
         <div class="flex mb-2">
             {#if activeCategory && activeCategory.imageUrl}

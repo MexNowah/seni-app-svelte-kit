@@ -15,7 +15,6 @@
     import { quintOut } from 'svelte/easing';
 
     let dietType = 'Portions';
-    let loading = true;
 
     let menuMeals = [
         'Desayuno',
@@ -27,6 +26,7 @@
     ];
     let activeMealTime = 'Desayuno';
     let currentDiet;
+    let loading = true;
 
     onMount(() => {
         getDiet()
@@ -69,12 +69,15 @@
 
 <div class="relative">
     
+    {#if !loading}
+
     <div class="flex">
-        <h1 class="text-lg grow">Dieta</h1>
+        <h1 class="text-lg grow font-bold">Dieta</h1>
         <!-- <div class="">
             <Icon size={24} src={FaSolidPlus} />
         </div> -->
     </div>
+
     <div class="">
         {#if activeMealTime}
             <div class="tabs-container flex w-full overflow-scroll pt-2 pb-2">
@@ -88,7 +91,7 @@
             </div>
         {/if}
     </div>
-    {#if !loading}
+    
         <div class="" in:slide={transitionParams} >
             {#if dietType == 'Menu'}
                 <DietMenu activeMealTime={activeMealTime} currentDiet={currentDiet} />
