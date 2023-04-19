@@ -2,6 +2,9 @@
 	//Import Images
   import seniSplash from '$lib/images/splash.png'
 
+  // Initialize deferredPrompt for use later to show browser install prompt.
+  let deferredPrompt;
+
   setTimeout(()=>{
     if(localStorage.getItem('userId')){
       window.location.href = "/home";

@@ -17,6 +17,8 @@
 
   let categoriesOptions = [];
   let activeCategory;
+  export let activeCategoryName;
+
   let portions = [];
   let loading = true;
 
@@ -38,7 +40,20 @@
       }
       let resp = await getData('Categories', filter);
       if(resp){
-        activeCategory = resp[0];
+        if(activeCategoryName){
+          console.log('activeCategoryName', activeCategoryName)
+          resp.find(item => {
+            console.log('item', item, item.title === activeCategoryName)
+            if(item.title === activeCategoryName){
+              activeCategory = item;
+            }
+          })
+        }else{
+          console.log('no param', activeCategoryName)
+          activeCategory = resp[0];
+        }
+        
+        console.log(activeCategory, 'activeCategory');
         categoriesOptions = resp;
         await getPotionsByCategory();
         loading = false;

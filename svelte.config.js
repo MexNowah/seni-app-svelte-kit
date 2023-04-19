@@ -12,9 +12,6 @@ const config = {
 		}),
 		files: {
 			serviceWorker: 'src/service-worker.js', // or `src/my-sw.ts`
-		},
-		serviceWorker: {
-			register: false
 		}
 	},
 	preprocess: vitePreprocess()

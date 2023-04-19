@@ -25,28 +25,27 @@
 	]
 	let activeTab = 0;
 	let standalone = true;
+	let height = window.innerHeight;
 
 	if (window.navigator?.standalone) {
 		standalone = true;
-  		console.log('The web app is running as a standalone app');
 	} else {
-		console.log('The web app is running in the browser');
+		standalone = false;
 	}
-
  
 </script>
 
-<div class="relative overflow-hidden h-screen">
+<div class="relative overflow-hidden" style:height={standalone ? '100vh': height + 'px'}>
 
 		<!-- Header -->
 		<Header />
 
 		<!-- Content -->
-		<div class="p-2 main-content">
+		<div class="p-2 main-content" >
 			{#each tabsOptions as item, i}
 				{#if item.name == 'Resumen' && activeTab == 0}
-					<div class="">
-					  <Home />
+					<div class="" >
+					  <Home/>
 					</div>
 				{/if}
 				{#if item.name == 'Equivalentes' && activeTab == 1}
@@ -63,7 +62,7 @@
 		</div>
 		
 		<!-- Footer Tabs -->
-	 	<div class="absolute w-full bottom-0 p-2 pb-4 grid grid-flow-col justify-stretch bg-white">
+	 	<div class="absolute w-full bottom-0 border-t border-zync-500 p-2 pb-4 grid grid-flow-col justify-stretch bg-white">
 
 			{#each tabsOptions as item, i}
 				<div
@@ -83,8 +82,5 @@
 </div>
 
 <style>
-	.standalone{
-		
-	}
 
 </style>

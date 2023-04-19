@@ -74,7 +74,7 @@
     <MeasuresWidget client={client}/>
 
     <!-- Graficos -->
-    <div class="mt-4">
+    <div class="mt-4 mb-10">
       <GraphicsWidget 
         weightArray={weightArray}
         imcArray={imcArray}
@@ -90,6 +90,6 @@
 <style>
   .main-content{
 		overflow-y: scroll;
-		max-height: 560px;
+    height: 84vh;
 	}
 </style>
