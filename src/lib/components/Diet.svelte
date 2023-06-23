@@ -20,9 +20,10 @@
         'Desayuno',
         'Colación 1',
         'Comida',
+        'Colación 2',
+        'Cena',
         'Pre entreno',
         'Post entreno',
-        'Cena'
     ];
     let activeMealTime = 'Desayuno';
     let currentDiet;
@@ -84,7 +85,7 @@
                 {#each menuMeals as meal, i}
                     <button on:click={ () => changeMealTime(meal) } 
                     class:selected="{activeMealTime == meal}"
-                    class="tab ring-2 ring-blue-500 rounded-full p-1 ml-1 mr-1 ">
+                    class="tab ring-2 ring-blue-500 rounded-full p-1 ml-1 mr-1 last:mr-2">
                         <p class="text-md">{meal}</p>
                     </button>  
                 {/each}      

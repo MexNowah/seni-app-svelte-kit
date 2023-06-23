@@ -6,17 +6,11 @@
       'Desayuno': 'comida1',
       'Colación 1': 'comida2',
       'Comida': 'comida3',
-      'Pre entreno': 'comida4',
-      'Post entreno': 'comida6',
-      'Cena': 'comida5'
+      'Colación 2': 'comida4',
+      'Cena': 'comida5',
+      'Pre entreno': 'comida6',
+      'Post entreno': 'comida7',
     }
-    let daysMask = [
-      'Lunes',
-      'Martes',
-      'Miércoles',
-      'Jueves',
-      'Viernes'
-    ]
 
     $: meals = currentDiet.days[mask[activeMealTime]];
 

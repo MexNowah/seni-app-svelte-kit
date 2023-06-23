@@ -16,9 +16,10 @@
       'Desayuno': 'comida1',
       'Colación 1': 'comida2',
       'Comida': 'comida3',
-      'Pre entreno': 'comida4',
-      'Post entereno': 'comida5',
-      'Cena': 'comida6'
+      'Colación 2': 'comida4',
+      'Cena': 'comida5',
+      'Pre entreno': 'comida6',
+      'Post entreno': 'comida7',
     }
 
     async function openCategoryModal(category){
