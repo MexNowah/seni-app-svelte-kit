@@ -42,6 +42,7 @@
         localStorage.setItem('token', resp.id);
         localStorage.setItem('userId', resp.userId);
         localStorage.setItem('lastEmail', credentials.email)
+        localStorage.setItem('adminId', resp.user.adminId)
         setTimeout(()=>{
             window.location.href = "/home";      
         }, 500)

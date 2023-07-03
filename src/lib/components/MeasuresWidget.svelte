@@ -43,7 +43,11 @@
            </div>
            <div class="text-right flex justify-center items-center">
               <div class="flex right-0 rounded-xl bg-sky-700 p-1 pl-2 pr-2 text-white ">
-                <p class="text-md">{ `${measure.value} ${measure.units}` }<p>
+                { #if measure.value}
+                  <p class="text-md">{ `${measure.value} ${measure.units}` }</p>
+                { :else }
+                  <p class="text-md"> No Disponible </p>
+                {/if}
               </div>
            </div>
         </div>

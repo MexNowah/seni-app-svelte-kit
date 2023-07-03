@@ -33,6 +33,7 @@
 		"chart.js": "^4.2.1",
 		"firebase": "^9.19.1",
 		"install": "^0.13.0",
+		"moment": "^2.29.4",
 		"npm": "^9.6.4",
 		"svelte-icons-pack": "^2.1.0",
 		"sweetalert": "^2.1.2"

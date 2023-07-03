@@ -13,6 +13,7 @@
 	import Home from "$lib/components/Home.svelte"
 	import Equivalents from "$lib/components/Equivalents.svelte"
 	import Diet from "$lib/components/Diet.svelte"
+	import News from "$lib/components/News.svelte"
 	//Import animations
 	import { fade } from 'svelte/transition';
 
@@ -20,8 +21,8 @@
 		{ name: "Resumen", icon: FaSolidWeight },
 		{ name: "Equivalentes", icon: FaSolidBalanceScale },
 		{ name: "Dieta", icon: FaSolidUtensils },
-		/* { name: "Perfil", icon: FaSolidUserEdit },
-		{ name: "Noticias", icon: FaNewspaper } */
+		/* { name: "Perfil", icon: FaSolidUserEdit }, */
+		{ name: "Noticias", icon: FaNewspaper } 
 	]
 	let activeTab = 0;
 	let standalone = true;
@@ -56,6 +57,11 @@
 				{#if item.name == 'Dieta' && activeTab == 2}
 					<div class="" transition:fade="{{delay: 100, duration: 300}}">
 					  <Diet />
+					</div>
+				{/if}
+				{#if item.name == 'Noticias' && activeTab == 3}
+					<div class="" transition:fade="{{delay: 100, duration: 300}}">
+					  <News />
 					</div>
 				{/if}
 			{/each}

@@ -46,7 +46,7 @@ export async function getData(model: string, filter = {}) {
 
 export async function Login(credentials = {}) {
 	try{
-		const response = await fetch(url + 'Clients/login', {
+		const response = await fetch(url + 'Clients/login?include=user', {
 			method: 'POST',
 			mode: 'cors',
 			cache: 'no-cache',
@@ -84,3 +84,32 @@ export async function Logout() {
 		return e;
 	}
 }
+
+export function getLoggedUserId(): any {
+	try {
+	  const userId = localStorage.getItem('userId');
+	  if (userId) {
+		return userId;
+	  }
+	  // return null or undefined if there is no logged user
+	  return null;
+	} catch (e) {
+	  console.error(e);
+	  return null;
+	}
+}
+
+export function getAdminId(): any {
+	try {
+	  const adminId = localStorage.getItem('adminId');
+	  if (adminId) {
+		return adminId;
+	  }
+	  // return null or undefined if there is no logged user
+	  return null;
+	} catch (e) {
+	  console.error(e);
+	  return null;
+	}
+}
+  
