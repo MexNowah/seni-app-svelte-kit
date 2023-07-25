@@ -17,6 +17,8 @@
 
   let categoriesOptions = [];
   let activeCategory;
+  export let activeCategoryName;
+
   let portions = [];
   let loading = true;
 
@@ -38,13 +40,26 @@
       }
       let resp = await getData('Categories', filter);
       if(resp){
-        activeCategory = resp[0];
+        if(activeCategoryName){
+          console.log('activeCategoryName', activeCategoryName)
+          resp.find(item => {
+            console.log('item', item, item.title === activeCategoryName)
+            if(item.title === activeCategoryName){
+              activeCategory = item;
+            }
+          })
+        }else{
+          console.log('no param', activeCategoryName)
+          activeCategory = resp[0];
+        }
+        
+        console.log(activeCategory, 'activeCategory');
         categoriesOptions = resp;
         await getPotionsByCategory();
         loading = false;
       }
     }catch(e){
-      console.log(e, 'error fetching categories');
+      //console.log(e, 'error fetching categories');
     }
   }
 
@@ -58,10 +73,10 @@
       let resp = await getData('Portions', filter);
       if(resp){
         portions = resp;
-        console.log('new portion', portions, activeCategory)
+        //console.log('new portion', portions, activeCategory)
       }
     }catch(e){
-      console.log(e, 'error fetching portions');
+      //console.log(e, 'error fetching portions');
     }
   }
 
@@ -85,13 +100,13 @@
         let resp = await getData('Portions', filter);
         if(resp){
           portions = resp;
-          console.log('new portion', portions, activeCategory)
+          //console.log('new portion', portions, activeCategory)
         } 
         
       }, 500);
       
     }catch(e){
-      console.log(e, 'error fetching portions');
+      //console.log(e, 'error fetching portions');
     }
   }
 
@@ -120,42 +135,46 @@
   {#if loading}
     <Spinner />
   {:else}
-    <div class="flex">
-      <div class="grow">
-        <h1 class="pl-1 text-lg font-bold">Equivalentes</h1>
-      </div>
-      <div class="flex border-b border-gray-600	ml-1">
-        <div class="flex justify-center items-center">
-          <Icon src={FaBrandsSistrix} />
+    
+
+    <div class="static">
+      <div class="flex">
+        <div class="grow">
+          <h1 class="pl-1 text-lg font-bold">Equivalentes</h1>
         </div>
-        <input class="pl-2 focus:outline-0" type="text" bind:value={ searchInput } 	on:input={() => 
-        searchPortion()} />
-        {#if searchInput.length}
-          <div on:click={() => resetSearch() } class="flex justify-center items-center">
-            <Icon src={FaSolidTimes} />
+        <div class="flex border-b border-gray-600	ml-1">
+          <div class="flex justify-center items-center">
+            <Icon src={FaBrandsSistrix} />
+          </div>
+          <input class="pl-2 focus:outline-0 outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
+          {#if searchInput.length}
+            <div on:click={() => resetSearch() } class="flex justify-center items-center">
+              <Icon src={FaSolidTimes} />
+            </div>
+          {/if}
+          
+        </div>
+      </div>
+      <div >
+        {#if activeCategory}
+          <div class="tabs-container flex w-full overflow-scroll p-2">
+          {#each categoriesOptions as category, i}
+            <button on:click={ () => changeCategory(category) } 
+            class:selected="{activeCategory.title == category.title}"
+            class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
+              {category.title}
+            </button>  
+          {/each}      
           </div>
         {/if}
-        
       </div>
     </div>
-    
-    <div class="">
-      {#if activeCategory}
-        <div class="tabs-container flex w-full overflow-scroll p-2">
-        {#each categoriesOptions as category, i}
-          <button on:click={ () => changeCategory(category) } 
-          class:selected="{activeCategory.title == category.title}"
-          class="tab ring-2 ring-blue-500 rounded-full p-1 ml-2 mr-2 ">
-            {category.title}
-          </button>  
-        {/each}      
-        </div>
-      {/if}
 
+    <div class="">
       <div class="mt-2 p-2" in:slide={transitionParams} >
         <div class="flex mb-2">
             {#if activeCategory && activeCategory.imageUrl}
-              <div class="rounded-full w-11 h-11 bg-red-700 p-1 flex justify-center items-center">
+              <div class="rounded-full w-11 h-11 p-1 flex justify-center items-center" style:background-color={activeCategory.color}>
                 <img src={activeCategory.imageUrl} alt="Category Logo" class="w-8">
               </div>
             {/if}
@@ -166,14 +185,14 @@
         <div class="overflow-scroll	h-screen no-show-scroll" >
           {#if portions.length}
             {#each portions as portion, i}
-              <div class="border-l-4 border-red-700 mt-1 mb-2 pl-2 pr-2" transition:fade>
+              <div class="border-l-4 mt-1 mb-2 pl-2 pr-2" style:border-color={activeCategory.color} transition:fade>
                 <h2 class="text-lg">{portion.name}</h2>
                 <p class="text-base text-zinc-500">{`Porción: ${portion.value} ${portion.measure} ${portion.measure != 'g' ? `(${portion.grams}g)`: ''} `}</p>
               </div>
             {/each}
           {:else}
             <div class="">
-              <h2>No se encontraron resultados<h2/>
+              <h2>No se encontraron resultados</h2>
             </div>
           {/if}
         </div>

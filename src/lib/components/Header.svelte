@@ -9,7 +9,7 @@
   import FaSolidPowerOff from "svelte-icons-pack/fa/FaSolidPowerOff";
 
   function logout(){
-    console.log('logging out');
+    //console.log('logging out');
     //clean local storage
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
@@ -17,7 +17,7 @@
     //Logout from api
     Logout();
     //Navigate to login
-    window.location.href = "/";
+    window.location.href = "/login";
   }
 </script>
 
@@ -27,7 +27,7 @@
   <div 
     on:click={() => logout()}
     class="flex justify-center items-center">
-    <Icon className="mr-2" color='white' src={FaSolidPowerOff} size={20}/>
+    <Icon className="mr-2" color='white' src={FaSolidPowerOff} size=20/>
   </div>
   
 </div>

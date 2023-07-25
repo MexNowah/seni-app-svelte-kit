@@ -1,7 +1,4 @@
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Seni Home" />
-</svelte:head>
+
 
 <script>
 	//Import Icons
@@ -16,34 +13,40 @@
 	import Home from "$lib/components/Home.svelte"
 	import Equivalents from "$lib/components/Equivalents.svelte"
 	import Diet from "$lib/components/Diet.svelte"
+	import News from "$lib/components/News.svelte"
 	//Import animations
-  import { slide } from "svelte/transition";
-	import { quintOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
-
 
 	let tabsOptions = [
 		{ name: "Resumen", icon: FaSolidWeight },
 		{ name: "Equivalentes", icon: FaSolidBalanceScale },
 		{ name: "Dieta", icon: FaSolidUtensils },
-		/* { name: "Perfil", icon: FaSolidUserEdit },
-		{ name: "Noticias", icon: FaNewspaper } */
+		/* { name: "Perfil", icon: FaSolidUserEdit }, */
+		{ name: "Noticias", icon: FaNewspaper } 
 	]
 	let activeTab = 0;
+	let standalone = true;
+	let height = window.innerHeight;
+
+	if (window.navigator?.standalone) {
+		standalone = true;
+	} else {
+		standalone = false;
+	}
  
 </script>
 
-<div class="relative overflow-hidden	 h-screen">
+<div class="relative overflow-hidden" style:height={standalone ? '100vh': height + 'px'}>
 
 		<!-- Header -->
 		<Header />
 
 		<!-- Content -->
-		<div class="p-2">
+		<div class="p-2 main-content" >
 			{#each tabsOptions as item, i}
 				{#if item.name == 'Resumen' && activeTab == 0}
-					<div class="">
-					  <Home />
+					<div class="" >
+					  <Home/>
 					</div>
 				{/if}
 				{#if item.name == 'Equivalentes' && activeTab == 1}
@@ -56,14 +59,21 @@
 					  <Diet />
 					</div>
 				{/if}
+				{#if item.name == 'Noticias' && activeTab == 3}
+					<div class="" transition:fade="{{delay: 100, duration: 300}}">
+					  <News />
+					</div>
+				{/if}
 			{/each}
 		</div>
+		
 		<!-- Footer Tabs -->
-	 	<div class="absolute w-full bottom-0 p-2 grid grid-flow-col justify-stretch bg-white">
+	 	<div class="absolute w-full bottom-0 border-t border-zync-500 p-2 pb-4 grid grid-flow-col justify-stretch bg-white">
+
 			{#each tabsOptions as item, i}
 				<div
 					on:click={() => activeTab = i}
-				  class={ activeTab == i ? 'text-sky-600' : 'text-zinc-500'}
+				  	class={ activeTab == i ? 'text-sky-600' : 'text-zinc-500'}
 					class:font-bold={activeTab == i}
 				>
 					<div class="text-center" >
@@ -74,5 +84,9 @@
 				
 			{/each}
 		</div>
+
 </div>
 
+<style>
+
+</style>

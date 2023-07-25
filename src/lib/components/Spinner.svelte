@@ -1,4 +1,4 @@
-<div>
+<div class="flex justify-center items-center">
   <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 </div>
 
@@ -20,7 +20,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fff;
+  background: #1071b9;
   margin: -4px 0 0 -4px;
 }
 .lds-roller div:nth-child(1) {

@@ -1,6 +1,7 @@
 <script> 
   import MeasuresWidget from '$lib/components/MeasuresWidget.svelte';
   import GraphicsWidget from '$lib/components/GraphicsWidget.svelte';
+  import Spinner from '$lib/components/Spinner.svelte';
   //Import Api
   import { getData } from '$lib/helpers/api';
   //Import Svelte
@@ -13,7 +14,7 @@
   let client;
   let loading = true;
 
-  let weightArray = [ ];
+  let weightArray = [];
   let imcArray = [];
   let grasaArray = [];
   let masaArray = [];
@@ -52,10 +53,10 @@
           start = 0
         }
         for(let x = start; x < client.querys.length; x++){
-            weightArray.push(client.querys[x].weight ||weightArray[weightArray.length - 1 ] || 0);
-            imcArray.push(client.querys[x].IMC || imcArray[imcArray.length - 1 ] || 0);
-            grasaArray.push(client.querys[x].porcentajeGrasa ||grasaArray[grasaArray.length - 1 ] || 0);
-            masaArray.push(client.querys[x].porcentajeMusculo || masaArray[masaArray.length - 1 ] ||  0);
+          weightArray.push(client.querys[x].weight ||weightArray[weightArray.length - 1 ] || 0);
+          imcArray.push(client.querys[x].IMC || imcArray[imcArray.length - 1 ] || 0);
+          grasaArray.push(client.querys[x].porcentajeGrasa ||grasaArray[grasaArray.length - 1 ] || 0);
+          masaArray.push(client.querys[x].porcentajeMusculo || masaArray[masaArray.length - 1 ] ||  0);
         } 
         
       }
@@ -63,18 +64,17 @@
       loading = false;
       
   }
-
     
 </script>
 
-<div> 
+<div class="main-content no-show-scroll"> 
    
   {#if !loading}
     <!-- Medidas -->
     <MeasuresWidget client={client}/>
 
     <!-- Graficos -->
-    <div class="mt-4">
+    <div class="mt-4 mb-10">
       <GraphicsWidget 
         weightArray={weightArray}
         imcArray={imcArray}
@@ -82,8 +82,14 @@
         masaArray={masaArray}
       />
     </div>
+ 
   {/if}
 
-  
-  
 </div>
+
+<style>
+  .main-content{
+		overflow-y: scroll;
+    height: 84vh;
+	}
+</style>

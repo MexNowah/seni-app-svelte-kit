@@ -10,3 +10,11 @@ node_modules
 .output
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+.firebase
+
+build
+public
+/public
+
+package-lock.json
