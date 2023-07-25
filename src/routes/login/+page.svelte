@@ -81,7 +81,7 @@
             "/>
           </label>
           <label class="block mt-2">
-            <span class="block text-sm font-medium text-gray-600 text-left">Contraseña</span>
+            <span class="block text-sm font-medium text-gray-600 text-left">Contraseña </span>
             <!-- Using form state modifiers, the classes can be identical for every input -->
             <input type="password" bind:value={credentials.password} class="mt-1 block w-full text-gray-600	 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
               focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
