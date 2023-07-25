@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "testing-seni",
     "public": "build",
     "ignore": [
       "firebase.json",
