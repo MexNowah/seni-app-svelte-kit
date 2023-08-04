@@ -49,7 +49,7 @@
     onMount(loadMore);
   </script>
   
-  <div class="news-container max-h-screen overflow-y-auto" use:infiniteScroll={{ loadMore }}>
+  <div class="news-container max-h-screen overflow-y-auto no-show-scroll" use:infiniteScroll={{ loadMore }}>
     {#each news as post (post.id)}
       <div class="last:mb-36">
         <NewsPost {...post} />

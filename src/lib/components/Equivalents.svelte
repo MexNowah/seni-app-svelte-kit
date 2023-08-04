@@ -137,7 +137,7 @@
   {:else}
     
 
-    <div class="static">
+    <div class="static ">
       <div class="flex">
         <div class="grow">
           <h1 class="pl-1 text-lg font-bold">Equivalentes</h1>
@@ -146,7 +146,9 @@
           <div class="flex justify-center items-center">
             <Icon src={FaBrandsSistrix} />
           </div>
-          <input class="pl-2 focus:outline-0 outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
+          <div class="pr-2">
+            <input class="pl-2 focus:outline-0 outline-0" type="text" bind:value={ searchInput } 	on:input={() => searchPortion()} />
+          </div>
           {#if searchInput.length}
             <div on:click={() => resetSearch() } class="flex justify-center items-center">
               <Icon src={FaSolidTimes} />

@@ -66,7 +66,7 @@
 
 
 
-<div class="pt-2"> 
+<div class="pt-2 pl-2 pr-2"> 
   <!-- Medidas -->
   <div class="rounded-lg shadow-lg shadow-zinc-500">
     <div class="p-2 rounded-t-lg bg-zinc-200">
