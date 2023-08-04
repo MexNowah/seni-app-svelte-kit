@@ -36,13 +36,13 @@
  
 </script>
 
-<div class="relative overflow-hidden" style:height={standalone ? '100vh': height + 'px'}>
+<div class="relative" style:height={standalone ? '100vh': height + 'px'}>
 
 		<!-- Header -->
 		<Header />
 
 		<!-- Content -->
-		<div class="p-2 main-content" >
+		<div class="pt-0 main-content h-5/6 max-h-screen overflow-y-auto no-show-scroll" >
 			{#each tabsOptions as item, i}
 				{#if item.name == 'Resumen' && activeTab == 0}
 					<div class="" >
@@ -50,7 +50,7 @@
 					</div>
 				{/if}
 				{#if item.name == 'Equivalentes' && activeTab == 1}
-					<div class="" transition:fade="{{delay: 150, duration: 300}}">
+					<div class="pl-2 pt-2" transition:fade="{{delay: 150, duration: 300}}">
 					  <Equivalents />
 					</div>
 				{/if}

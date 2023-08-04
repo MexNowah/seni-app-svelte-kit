@@ -68,32 +68,34 @@
 </script>
 
 
-<div class="relative">
+<div class="relative pl-2">
     
     {#if !loading}
 
-    <div class="flex">
-        <h1 class="text-lg grow font-bold">Dieta</h1>
-        <!-- <div class="">
-            <Icon size={24} src={FaSolidPlus} />
-        </div> -->
-    </div>
-
-    <div class="">
-        {#if activeMealTime}
-            <div class="tabs-container flex w-full overflow-scroll pt-2 pb-2">
-                {#each menuMeals as meal, i}
-                    <button on:click={ () => changeMealTime(meal) } 
-                    class:selected="{activeMealTime == meal}"
-                    class="tab ring-2 ring-blue-500 rounded-full p-1 ml-1 mr-1 last:mr-2">
-                        <p class="text-md">{meal}</p>
-                    </button>  
-                {/each}      
+        <div class="fixed bg-white">
+            <div class="flex">
+                <h1 class="text-lg grow font-bold pt-2">Dieta</h1>
+                <!-- <div class="">
+                    <Icon size={24} src={FaSolidPlus} />
+                </div> -->
             </div>
-        {/if}
-    </div>
     
-        <div class="" in:slide={transitionParams} >
+            <div class="">
+                {#if activeMealTime}
+                    <div class="tabs-container flex w-full overflow-scroll pt-2 pb-2">
+                        {#each menuMeals as meal, i}
+                            <button on:click={ () => changeMealTime(meal) } 
+                            class:selected="{activeMealTime == meal}"
+                            class="tab ring-2 ring-blue-500 rounded-full p-1 ml-1 mr-1 last:mr-2">
+                                <p class="text-md">{meal}</p>
+                            </button>  
+                        {/each}      
+                    </div>
+                {/if}
+            </div>
+        </div>
+    
+        <div class="pt-20" in:slide={transitionParams} >
             {#if dietType == 'Menu'}
                 <DietMenu activeMealTime={activeMealTime} currentDiet={currentDiet} />
             {:else}
