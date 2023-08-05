@@ -72,7 +72,7 @@
     
     {#if !loading}
 
-        <div class="fixed bg-white">
+        <div class="static bg-white">
             <div class="flex">
                 <h1 class="text-lg grow font-bold pt-2">Dieta</h1>
                 <!-- <div class="">
@@ -95,7 +95,7 @@
             </div>
         </div>
     
-        <div class="pt-20" in:slide={transitionParams} >
+        <div class="pt-2" in:slide={transitionParams} >
             {#if dietType == 'Menu'}
                 <DietMenu activeMealTime={activeMealTime} currentDiet={currentDiet} />
             {:else}
