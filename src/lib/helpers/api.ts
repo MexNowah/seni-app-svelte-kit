@@ -71,13 +71,13 @@ export async function getData(model: string, filter = {}) {
 			referrerPolicy: 'no-referrer'
 		});
 		
-		console.log('resp', response);
+		//console.log('resp', response);
 		if(response.status == 401){
 			cleanToken();
 		}
 		return response.json();
 	}catch(e){
-		console.log(e, 'error getData');
+		//console.log(e, 'error getData');
 		/* let resp = await response.json(); */
 		
 		return e;
