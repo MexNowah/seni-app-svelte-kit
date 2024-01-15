@@ -17,7 +17,7 @@
 
   let categoriesOptions = [];
   let activeCategory;
-  export let activeCategoryName;
+  let activeCategoryName;
 
   let portions = [];
   let loading = true;

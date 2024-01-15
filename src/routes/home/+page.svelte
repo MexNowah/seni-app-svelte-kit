@@ -16,6 +16,8 @@
 	import News from "$lib/components/News.svelte"
 	//Import animations
 	import { fade } from 'svelte/transition';
+	//Import Api
+	import { getData } from '$lib/helpers/api';
 
 	let tabsOptions = [
 		{ name: "Resumen", icon: FaSolidWeight },
