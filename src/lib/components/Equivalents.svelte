@@ -3,6 +3,8 @@
   import { getData } from '$lib/helpers/api';
   //Import Svelte
   import { onMount } from 'svelte';
+  //Import constants
+  import { maskImages, maskColors } from '$lib/helpers/const'
   //Import Icons
   import Icon from 'svelte-icons-pack/Icon.svelte';
 	import FaSolidChevronDown from "svelte-icons-pack/fa/FaSolidChevronDown";
@@ -18,9 +20,11 @@
   let categoriesOptions = [];
   let activeCategory;
   let activeCategoryName;
+  let activeCategoryId;
 
   let portions = [];
   let loading = true;
+  let notFoundInCurrentCategory = false;
 
   let searchInput = "";
 
@@ -41,25 +45,22 @@
       let resp = await getData('Categories', filter);
       if(resp){
         if(activeCategoryName){
-          console.log('activeCategoryName', activeCategoryName)
           resp.find(item => {
-            console.log('item', item, item.title === activeCategoryName)
             if(item.title === activeCategoryName){
               activeCategory = item;
+              activeCategoryId = item.id
             }
           })
         }else{
-          console.log('no param', activeCategoryName)
           activeCategory = resp[0];
         }
-        
-        console.log(activeCategory, 'activeCategory');
+        console.log('active category', activeCategory);
         categoriesOptions = resp;
         await getPotionsByCategory();
         loading = false;
       }
     }catch(e){
-      //console.log(e, 'error fetching categories');
+      
     }
   }
 
@@ -70,13 +71,13 @@
           categoryId: activeCategory.id
         }
       }
+      notFoundInCurrentCategory = false;
       let resp = await getData('Portions', filter);
       if(resp){
         portions = resp;
-        //console.log('new portion', portions, activeCategory)
       }
     }catch(e){
-      //console.log(e, 'error fetching portions');
+
     }
   }
 
@@ -98,21 +99,37 @@
           }
         }
         let resp = await getData('Portions', filter);
-        if(resp){
+        if(resp && resp.length > 0){
           portions = resp;
-          //console.log('new portion', portions, activeCategory)
-        } 
-        
+          notFoundInCurrentCategory = false;
+        }else if(resp?.length == 0){
+          let newResp = await getData('Portions', {
+            where: {
+              name: {
+                like: searchInput,
+                options: 'i'
+              }
+            },
+            include: {
+              relation: 'category'
+            }
+          });
+          if(resp){
+            notFoundInCurrentCategory = true;
+            portions = newResp;
+          }
+        }
       }, 500);
       
     }catch(e){
-      //console.log(e, 'error fetching portions');
+
     }
   }
 
   function changeCategory(category){
       activeCategory = category;
-      getPotionsByCategory()
+      searchPortion();
+      //getPotionsByCategory()
   }
 
   function resetSearch(){
@@ -142,7 +159,7 @@
         <div class="grow">
           <h1 class="pl-1 text-lg font-bold">Equivalentes</h1>
         </div>
-        <div class="flex border-b border-gray-600	ml-1">
+        <div class="flex border-b border-gray-600	ml-1 mr-2">
           <div class="flex justify-center items-center">
             <Icon src={FaBrandsSistrix} />
           </div>
@@ -154,7 +171,6 @@
               <Icon src={FaSolidTimes} />
             </div>
           {/if}
-          
         </div>
       </div>
       <div >
@@ -185,11 +201,23 @@
             </div>
         </div>
         <div class="overflow-scroll	h-screen no-show-scroll" >
+          {#if notFoundInCurrentCategory && portions.length}
+            <div class="">
+              <h2>No se encontraron resultados en categoria {activeCategory.title}, aquí mostramos alimentos de otras categorias.</h2>
+            </div>
+          {/if}
           {#if portions.length}
             {#each portions as portion, i}
-              <div class="border-l-4 mt-1 mb-2 pl-2 pr-2" style:border-color={activeCategory.color} transition:fade>
+              <div class="border-l-4 mt-1 mb-2 pl-2 pr-2" style:border-color={activeCategory.id == portion.categoryId ? activeCategory.color : portion.category?.color} transition:fade>
                 <h2 class="text-lg">{portion.name}</h2>
                 <p class="text-base text-zinc-500">{`Porción: ${portion.value} ${portion.measure} ${portion.measure != 'g' ? `(${portion.grams}g)`: ''} `}</p>
+                {#if activeCategory.id != portion.categoryId}
+                  <div class="relative">
+                    <button class="absolute right-0 p-2 pt-0.5 pb-0.5 mr-1 text-white rounded-md top-minus-30" style:background-color={portion.category?.color}>
+                        {portion.category?.title}
+                    </button>
+                  </div>
+                {/if}
               </div>
             {/each}
           {:else}
@@ -223,5 +251,8 @@
   .selected{
     color: white;
     background-color: rgb(59 130 246)
+  }
+  .top-minus-30{
+    top: -26px;
   }
 </style>
