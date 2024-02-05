@@ -2,7 +2,7 @@
   import MeasuresWidget from '$lib/components/MeasuresWidget.svelte';
   import GraphicsWidget from '$lib/components/GraphicsWidget.svelte';
   //Import Api
-  import { getData } from '$lib/helpers/api';
+  import { getData, patchData } from '$lib/helpers/api';
   import { formatDate } from '$lib/helpers/service';
   //Import Svelte
   import { onMount } from 'svelte'
@@ -15,6 +15,7 @@
     moment.locale('es');
     getClientInfo();
     checkForAppointments();
+    updateLastLogin();
   })
 
   let client;
@@ -29,6 +30,11 @@
   let grasaArray = [];
   let masaArray = [];
   let datesArray = [];
+
+  async function updateLastLogin(){
+    let userId = localStorage.getItem('userId') || null;
+    if(userId) await patchData('Clients', userId, { lastLogin: new Date() })
+  }
 
   async function checkForAppointments(){
     let userId = localStorage.getItem('userId');
