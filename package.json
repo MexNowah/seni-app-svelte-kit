@@ -6,6 +6,7 @@
 		"build": "vite build",
 		"deploy": "firebase deploy",
 		"deploy-test": "firebase deploy --only hosting:testing-seni",
+		"emulator": "firebase emulators:start",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",

@@ -98,6 +98,7 @@ export async function Login(credentials = {}) {
 			referrerPolicy: 'no-referrer',
 			body: JSON.stringify(credentials)
 		});
+		console.log(response, 'tokens', )
 		return response.json();
 	}catch(e){
 		return e;

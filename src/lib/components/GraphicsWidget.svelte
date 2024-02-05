@@ -5,15 +5,17 @@
   export let imcArray;
   export let grasaArray;
   export let masaArray;
+  export let datesArray;
 
   onMount(() => {
 		
     const ctx = document.getElementById('myChart');
-    
+  
+
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ["28 Ene",	"14 Feb",	"28 Feb",	"15 Mar",	"31 Mar"],
+          labels: datesArray,
           datasets: [
             {
               label: 'Peso (Kg)', // Name the series
@@ -60,7 +62,6 @@
     });
     
 	});
-
   
 </script>
 
@@ -78,5 +79,4 @@
       </div>
     </div>
   </div>
-
 </div>

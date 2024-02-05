@@ -7,14 +7,18 @@
     import DietMenu from '$lib/components/DietMenu.svelte';
     import PortionsMenu from '$lib/components/PortionsMenu.svelte';
     import Spinner from '$lib/components/Spinner.svelte';
+    import AIsuggestions from '$lib/components/AIsuggestions.svelte';
     //Import Icons
     import Icon from 'svelte-icons-pack/Icon.svelte';
     import FaSolidPlus from "svelte-icons-pack/fa/FaSolidPlus";
+    //Import svelte components
+    import Modal from '$lib/components/Modal.svelte';
     //Import animations
     import { slide } from "svelte/transition";
     import { quintOut } from 'svelte/easing';
 
     let dietType = 'Portions';
+    let showAiModal = false;
 
     let menuMeals = [
         'Desayuno',
@@ -65,6 +69,11 @@
         axis: 'y'
     }; 
 
+    let askAI = async function(){
+        console.log('askAI');
+        showAiModal = true;
+    } 
+
 </script>
 
 
@@ -94,6 +103,18 @@
                 {/if}
             </div>
         </div>
+
+        <!-- <div class="relative">
+            <button class="absolute right-0 p-2 pt-0.5 pb-0.5 mr-1 bg-sky-600 text-white rounded-md" on:click={() => askAI()}>
+                Sugerencias
+            </button>
+        </div>
+
+        {#if showAiModal}
+            <Modal bind:showModal={showAiModal}>
+                <AIsuggestions />
+            </Modal>  
+        {/if} -->
     
         <div class="pt-2" in:slide={transitionParams} >
             {#if dietType == 'Menu'}

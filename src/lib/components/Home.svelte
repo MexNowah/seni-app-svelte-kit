@@ -3,6 +3,7 @@
   import GraphicsWidget from '$lib/components/GraphicsWidget.svelte';
   //Import Api
   import { getData } from '$lib/helpers/api';
+  import { formatDate } from '$lib/helpers/service';
   //Import Svelte
   import { onMount } from 'svelte'
   //Import moment
@@ -27,6 +28,7 @@
   let imcArray = [];
   let grasaArray = [];
   let masaArray = [];
+  let datesArray = [];
 
   async function checkForAppointments(){
     let userId = localStorage.getItem('userId');
@@ -58,7 +60,8 @@
           include: [{
             relation: 'querys',
             scope: {
-              order: 'date DESC'
+              order: 'date DESC',
+              limit: 5
             }
           }, {
             relation: 'appointments',
@@ -80,16 +83,22 @@
         }else{
           start = 0
         }
-        for(let x = start; x < client.querys.length; x++){
-          weightArray.push(client.querys[x].weight ||weightArray[weightArray.length - 1 ] || 0);
-          imcArray.push(client.querys[x].IMC || imcArray[imcArray.length - 1 ] || 0);
-          grasaArray.push(client.querys[x].porcentajeGrasa ||grasaArray[grasaArray.length - 1 ] || 0);
-          masaArray.push(client.querys[x].porcentajeMusculo || masaArray[masaArray.length - 1 ] ||  0);
+
+        //Reorder array
+        let querys = client.querys.reverse();
+
+        for(let x = start; x < querys.length; x++){
+          weightArray.push(querys[x].weight || weightArray[weightArray.length -1 ] || 0);
+          imcArray.push(querys[x].IMC || imcArray[imcArray.length -1 ] || 0);
+          grasaArray.push(querys[x].porcentajeGrasa || grasaArray[grasaArray.length -1 ] || 0);
+          masaArray.push(querys[x].porcentajeMusculo || masaArray[masaArray.length -1 ] || 0);
+          datesArray.push(await formatDate(querys[x].date))
         } 
-        
       }
 
       loading = false;
+
+      
       
   }
     
@@ -114,7 +123,8 @@
 
     <!-- Graficos -->
     <div class="mt-4 mb-10">
-      <GraphicsWidget 
+      <GraphicsWidget
+        datesArray={datesArray} 
         weightArray={weightArray}
         imcArray={imcArray}
         grasaArray={grasaArray}
