@@ -45,7 +45,7 @@
       </div>
     </div>
     {#if imageUrl} <!-- Check if imageUrl exists -->
-      <img class="w-full h-64 object-cover my-2" src="{imageUrl}" alt="image" />
+      <img class="w-full h-64 object-contain my-2" src="{imageUrl}" alt="image" />
     {/if}
     <p class="text-gray-800">{text}</p>
     {#if link} <!-- Check if links exists -->
